@@ -19,10 +19,16 @@ var factorial = function(n) {
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
-  if (sum.length === array.length) {
-    return sum;
+  //Need to access each variable in array of n length
+  //Base case needs to be set to length of array
+  //Need to add the variable from prior run through?
+  if (array.length === 0) {
+    return 0;
+  } else if (array.length === 1) {
+    return array[0];
   } else {
-    return array[0] + sum(array[0 + 1]);
+    console.log(array.slice(1));
+    return array[0] + sum(array.slice(1));
   }
 };
 
