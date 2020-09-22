@@ -34,7 +34,7 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  let sum = 0;
+  var sum = 0;
   array.forEach(sumNumbers);
 
   function sumNumbers(item) {
@@ -155,6 +155,7 @@ var compareStr = function(str1, str2) {
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function(str) {
+
 };
 
 // 17. Reverse the order of an array
@@ -190,7 +191,17 @@ var rMap = function(array, callback) {
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
-var countKeysInObj = function(obj, key) {
+var countKeysInObj = function(obj, specificKey) {
+  var keysCount = 0;
+  for (var keys in obj) {
+    if (typeof obj[keys] === 'object') {
+      keysCount += countKeysInObj(obj[keys], specificKey);
+    }
+    if (keys === specificKey) {
+      keysCount++;
+    }
+  }
+  return keysCount;
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
@@ -198,6 +209,16 @@ var countKeysInObj = function(obj, key) {
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+  var valuesCount = 0;
+  for (var keys in obj) {
+    if (typeof obj[keys] === 'object') {
+      valuesCount += countValuesInObj(obj[keys], value);
+    }
+    if (obj[keys] === value) {
+      valuesCount++;
+    }
+  }
+  return valuesCount;
 };
 
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
